@@ -1,6 +1,8 @@
 import os
+
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
+
 from src import run
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -42,4 +44,5 @@ def allowed_file(filename):
 
 
 if __name__ == '__main__':
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run(debug=False)
