@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Avaliador musical</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    Avalidor musical
+</nav>
+
+<!-- Bagulho de loading pq é lento -->
+<div id="loading-overlay">
+    <div class="spinner"></div>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+    <img src="{{ url_for('static', filename='img/result.png') }}" width="800px" height="800px">
+</div>
+
+<script>
+    document.getElementById('upload-form').addEventListener('submit', function () {
+        document.getElementById('loading-overlay').style.display = 'flex';
+    });
+</script>
+</body>
+</html>
