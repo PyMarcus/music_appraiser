@@ -1,6 +1,8 @@
 import os
-from flask import Flask, render_template, request
+
+from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
+
 from src import run
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -17,12 +19,12 @@ def index() -> str:
 @app.route("/upload", methods=["POST"])
 def upload() -> str:
     if 'file' not in request.files:
-        return "No file part"
+        return jsonify({'error': 'No file part'}), 400
 
     file = request.files['file']
 
     if file.filename == '':
-        return "No selected file"
+        return jsonify({'error': 'No selected file'}), 400
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
@@ -30,7 +32,7 @@ def upload() -> str:
         file.save(file_path)
         run(file_path)
         return kmeans_template()
-    return "Invalid file format"
+    return jsonify({'error': 'Invalid file format'}), 400
 
 
 def kmeans_template() -> str:
@@ -42,4 +44,5 @@ def allowed_file(filename):
 
 
 if __name__ == '__main__':
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run(debug=False)

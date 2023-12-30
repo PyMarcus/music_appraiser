@@ -1,33 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Avaliador musical</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+    <link
+      href="{{url_for('static',filename='css/styles.css')}}"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <main class="w-screen h-screen flex flex-col justify-between items-center">
+      <header class="w-full bg-fuchsia-800">
+        <div
+          class="max-w-5xl mx-auto p-4 flex items-center justify-between gap-4"
+        >
+          <h1 class="text-lg text-neutral-50 font-bold flex gap-2 items-center">
+            <span class="leading-none text-xl">
+              <i class="ph-bold ph-music-notes-simple"></i>
+            </span>
+            <span>Avalidor musical</span>
+          </h1>
 
-<nav>
-    Avalidor musical
-</nav>
+          <label
+            class="cursor-pointer text-white font-medium rounded-md border-2 border-white px-3 py-1 hover:bg-white/80 hover:text-fuchsia-800 transition-colors duration-300 ease-in-out flex gap-2 items-center"
+          >
+            <span class="sr-only md:not-sr-only">Enviar arquivo</span>
+            <span class="md:hidden leading-none text-xl">
+              <i class="ph-bold ph-file-arrow-up"></i>
+            </span>
+            <input type="file" id="upload-input" class="sr-only" />
+          </label>
+        </div>
+      </header>
 
-<!-- Bagulho de loading pq é lento -->
-<div id="loading-overlay">
-    <div class="spinner"></div>
-</div>
+      <div class="flex-1 grid place-items-center">
+        <img
+          id="result-image"
+          src="{{ url_for('static', filename='img/result.png') }}"
+          class="lg:w-[52rem] lg:h-[52rem] object-contain"
+          alt="Resultado"
+        />
+        <div
+          id="loading-spinner"
+          class="h-12 w-12 rounded-full border-4 border-neutral-300 border-t-fuchsia-600 animate-spin hidden"
+        >
+          <span class="sr-only">Carregando...</span>
+        </div>
+      </div>
+    </main>
 
-<div style="display: flex; flex-direction: column; align-items: center;">
-    <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
-    </form>
-    <img src="{{ url_for('static', filename='img/result.png') }}" width="800px" height="800px">
-</div>
-
-<script>
-    document.getElementById('upload-form').addEventListener('submit', function () {
-        document.getElementById('loading-overlay').style.display = 'flex';
-    });
-</script>
-</body>
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+  </body>
 </html>

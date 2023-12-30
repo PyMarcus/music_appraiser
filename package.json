@@ -1,0 +1,15 @@
+{
+  "name": "music_appraiser",
+  "version": "1.0.0",
+  "description": "identification of the most listened to groups, using the k-means technique",
+  "main": "index.js",
+  "scripts": {
+    "tailwind": "npx tailwindcss -i static/css/globals.css -o static/css/styles.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
