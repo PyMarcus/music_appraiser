@@ -1,8 +1,8 @@
 const toggleElementDisplay = (elementId, display) => {
   const element = document.querySelector(`#${elementId}`);
   display
-    ? element.classList.add("hidden")
-    : element.classList.remove("hidden");
+    ? element.classList.remove("hidden")
+    : element.classList.add("hidden");
 };
 
 const displayLoadingSpinner = (display) =>
@@ -15,6 +15,7 @@ const uploadImage = async (formData) => {
   try {
     const result = await fetch("/upload", { method: "POST", body: formData });
     if (result.ok) displayResultImage(true);
+    location.reload();
   } catch (error) {
     console.error("Error uploading file:", error);
   } finally {
